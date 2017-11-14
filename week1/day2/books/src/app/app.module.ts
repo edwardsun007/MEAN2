@@ -4,11 +4,19 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { BookEditComponent } from './books/edit/edit.component';
+import { BookListComponent } from './books/list/list.component';
+import { BookDetailComponent } from './books/detail/detail.component';
+import { BookNewComponent } from './books/new/book-new.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BookEditComponent,
+    BookListComponent,
+    BookDetailComponent,
+    BookNewComponent,
   ],
   imports: [
     BrowserModule,
