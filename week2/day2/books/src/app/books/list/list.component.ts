@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import {Book } from '../../book';
+import { Book } from '../../book';
 import { BOOKS } from '../../data/book-data';
 
 import { TitleizePipe } from '../../titleize.pipe';
@@ -35,8 +35,8 @@ export class BookListComponent implements OnInit {
     // }
   }
 
-  addBook(book: Book) {
-    console.log('adding a book', book);
+  addBook(book: Book): void {
+    console.log('adding book', book);
 
     this.books.push(book);
   }

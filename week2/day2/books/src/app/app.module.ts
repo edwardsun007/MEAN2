@@ -11,7 +11,7 @@ import { BookNewComponent } from './books/new/book-new.component';
 
 import { TitleizePipe } from './titleize.pipe';
 
-// TitleizePipe.skipWords = ['new', 'things'];
+// TitleizePipe.skipWords = ['of'];
 
 @NgModule({
   declarations: [

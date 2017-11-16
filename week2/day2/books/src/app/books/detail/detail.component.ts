@@ -11,5 +11,4 @@ import { Book } from '../../book';
 export class BookDetailComponent {
   @Input()
   book: Book;
-
 }

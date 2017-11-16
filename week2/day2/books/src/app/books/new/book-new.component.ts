@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+ import { Component, Output, EventEmitter } from '@angular/core';
 
 import { NgForm } from '@angular/forms';
 
@@ -17,10 +17,9 @@ export class BookNewComponent {
   onSubmit(event: Event, form: NgForm) {
     event.preventDefault();
 
-    console.log(this.book);
+    // console.log(this.book);
 
     // this.books.push(this.book);
-
     this.newBook.emit(this.book);
 
     this.book = new Book();
