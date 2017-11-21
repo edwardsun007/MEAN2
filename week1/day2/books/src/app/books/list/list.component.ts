@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 
-import {Book } from '../../book';
-import { BOOKS } from '../../data/book-data';
+import { Subscription } from 'rxjs/Subscription';
+
+import { Book } from '../../book';
+
+import { BookService } from '../../services/book.service';
 
 import { TitleizePipe } from '../../titleize.pipe';
 
@@ -12,16 +15,32 @@ import { TitleizePipe } from '../../titleize.pipe';
   encapsulation: ViewEncapsulation.None,
   providers: [TitleizePipe],
 })
-export class BookListComponent implements OnInit {
-  books: Array<Book> = BOOKS;
+export class BookListComponent implements OnInit, OnDestroy {
+  books: Array<Book> = [];
   selectedBook: Book;
+  errorMessage: string;
+  sub: Subscription;
 
-  constructor(private titleize: TitleizePipe) { }
+  constructor(
+    private titleize: TitleizePipe,
+    private bookService: BookService
+  ) { }
 
-  ngOnInit() {
-    this.books.forEach(book => {
-      book.author = this.titleize.transform(book.author);
-    });
+  ngOnInit(): void {
+    this.sub = this.bookService.getBooks()
+      .subscribe(books => {
+        this.books = books;
+        // this.titleCaseAuthors();
+      },
+      (response) => {
+        console.log('there was an error!');
+      }
+    );
+
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   onSelect(book: Book): void {
@@ -33,6 +52,35 @@ export class BookListComponent implements OnInit {
     // } else {
     //   this.selectedBook = book;
     // }
+  }
+
+  titleCaseAuthors(): void {
+    this.books.forEach(book => {
+      book.author = this.titleize.transform(book.author);
+    });
+  }
+
+  deleteBook(book: Book): void {
+    this.bookService.deleteBook(book)
+      .subscribe(deletedBook => {
+        console.log(deletedBook);
+
+        this.books.splice(this.books.indexOf(book), 1);
+
+        if (this.selectedBook === book) {
+          this.onSelect(book);
+        }
+      },
+
+    (response) => {
+      console.log('there was an error', response);
+
+      this.errorMessage = response.json();
+    });
+  }
+
+  onEvent(event: Event): void {
+    event.stopPropagation();
   }
 
   addBook(book: Book) {

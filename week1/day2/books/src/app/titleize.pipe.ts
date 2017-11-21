@@ -7,7 +7,7 @@ import { Pipe, PipeTransform, Injectable } from '@angular/core';
 export class TitleizePipe implements PipeTransform {
   static skipWords = ['in', 'of', 'a', 'the'];
 
-  transform(value: string, args: boolean | string[]): string {
+  transform(value: string, args?: boolean | string[]): string {
     if (typeof value !== 'string') { return value; }
 
 

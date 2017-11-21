@@ -1,6 +1,11 @@
 <books-book-new (newBook)='addBook($event)'></books-book-new>
 
 <div>
+
+  <div *ngIf='errorMessage'>
+    <p>{{ errorMessage }}</p>
+  </div>
+
   <table>
     <thead>
       <tr>
@@ -17,9 +22,9 @@
         <td>{{ book.id }}</td>
         <td>{{ book.title | titleize }}</td>
         <td>{{ book.year }}</td>
-        <td>{{ book.author }}</td>
-        <td>
-          Future actions
+        <td>{{ book.author | titleize }}</td>
+        <td (click)='onEvent($event)'>
+          <button (click)='deleteBook(book)'>Delete</button>
         </td>
       </tr>
     </tbody>
