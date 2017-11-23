@@ -1,5 +1,6 @@
-<books-book-new (newBook)='addBook($event)'></books-book-new>
+<!-- <books-book-new (newBook)='addBook($event)'></books-book-new> -->
 
+<app-nav></app-nav>
 <div>
 
   <div *ngIf='errorMessage'>
@@ -18,7 +19,12 @@
     </thead>
 
     <tbody>
-      <tr *ngFor='let book of books' (click)='onSelect(book)'>
+      <!-- /books/10 -->
+      <tr
+      *ngFor='let book of books'
+      (click)='onSelect(book)'
+      [routerLink]="['/books', book.id]"
+      >
         <td>{{ book.id }}</td>
         <td>{{ book.title | titleize }}</td>
         <td>{{ book.year }}</td>
@@ -31,4 +37,4 @@
   </table>
 </div>
 
-<books-book-detail [book]='selectedBook' *ngIf='selectedBook'></books-book-detail>
+<!-- <books-book-detail [book]='selectedBook' *ngIf='selectedBook'></books-book-detail> -->

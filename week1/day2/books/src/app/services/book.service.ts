@@ -25,6 +25,11 @@ export class BookService {
 
   }
 
+  getBook(id: string): Observable<Book> {
+    return this.http.get(`${ this.base }/${ id }`)
+      .map(response => response.json());
+  }
+
   addBook(book: Book): Observable<Book> {
     return this.http.post(this.base, book)
       .map(response => response.json());
