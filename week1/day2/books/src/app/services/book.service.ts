@@ -15,7 +15,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class BookService {
-  private base = 'http://59498bce6d49df0011102cfc.mockapi.io/books';
+  // private base = 'http://59498bce6d49df0011102cfc.mockapi.io/books';
+  private base = '/api/books';
 
   constructor(private http: Http) {}
 
@@ -31,12 +32,13 @@ export class BookService {
   }
 
   addBook(book: Book): Observable<Book> {
+    console.log('adding book', book);
     return this.http.post(this.base, book)
       .map(response => response.json());
   }
 
   deleteBook(book: Book): Observable<Book> {
-    return this.http.delete(`${ this.base }/${ book.id }`)
+    return this.http.delete(`${ this.base }/${ book._id }`)
       .map(response => response.json());
   }
 

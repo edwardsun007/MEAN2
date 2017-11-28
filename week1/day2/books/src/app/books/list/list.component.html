@@ -23,9 +23,9 @@
       <tr
       *ngFor='let book of books'
       (click)='onSelect(book)'
-      [routerLink]="['/books', book.id]"
+      [routerLink]="['/books', book._id]"
       >
-        <td>{{ book.id }}</td>
+        <td>{{ book._id }}</td>
         <td>{{ book.title | titleize }}</td>
         <td>{{ book.year }}</td>
         <td>{{ book.author | titleize }}</td>
