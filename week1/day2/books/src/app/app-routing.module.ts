@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
 
+import { HomeComponent } from './home/home.component';
 import { BookListComponent } from './books/list/list.component';
 import { BookNewComponent } from './books/new/book-new.component';
 import { BookDetailComponent } from './books/detail/detail.component';
@@ -11,8 +12,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'books',
-    pathMatch: 'full'
+    component: HomeComponent,
   },
   {
     path: 'books',
